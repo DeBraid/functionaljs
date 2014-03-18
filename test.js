@@ -75,7 +75,27 @@ function() {
     }).mergeAll();  
   }).mergeAll();        
 
+// create helper function to make the above easier.
+// implement: flatMap() (map followed by mergeAll)
+
+  Array.prototype.flatMap - function(projectionFunction) {
+    return this.map(function(item) {
+      return projectionFunction(item);
+    }).mergeAll();
+  };
+
+  var spanishFrenchEnglishWords = [ ["cero","rien","zero"], ["uno","un","one"], ["dos","deux","two"] ];
+
+  // collect all words for each language
+  var allWords = [0,1,2].flatMap(function (word) {
+    return spanishFrenchEnglishWords[word]; 
+  });
+
 };
+
+
+
+
 
 
 
