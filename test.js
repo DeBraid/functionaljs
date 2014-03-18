@@ -1,4 +1,4 @@
-function() {
+function () {
   var movieLists = [
             {
                 name: "Instant Queue",
@@ -58,7 +58,7 @@ function() {
             }
         ];
 
-// return [{"id": , "title":  , "boxarts": url }]
+  // return [{"id": , "title":  , "boxarts": url }]
 
   return movieLists.map(function (movieList) {
     return movieList.videos.map(function (video) {
@@ -75,8 +75,8 @@ function() {
     }).mergeAll();  
   }).mergeAll();        
 
-// create helper function to make the above easier.
-// implement: flatMap() (map followed by mergeAll)
+  // create helper function to make the above easier.
+  // implement: flatMap() (map followed by mergeAll)
 
   Array.prototype.flatMap - function(projectionFunction) {
     return this.map(function(item) {
@@ -90,6 +90,19 @@ function() {
   var allWords = [0,1,2].flatMap(function (word) {
     return spanishFrenchEnglishWords[word]; 
   });
+
+
+  // using flatMap to return object 
+  return movieLists.flatMap(function (movieList) {
+    return movieList.videos.flatMap(function(video){
+      return video.boxarts.filter(function(boxart){
+          return boxart.width === 150; 
+        })
+        .map(function(boxart) {
+          return {id: video.id, title: video.title, boxart: boxart.url }
+        })
+    })
+  });   
 
 };
 
